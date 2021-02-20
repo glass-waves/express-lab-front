@@ -8,7 +8,7 @@ export default class ModuleList extends Component {
             <div className="container">
                 {data.map(item => {
                     return <div className="moduleDiv">
-                        <p>{item.id}</p>
+                        <p>{item._id}</p>
                         <p>{item.brand}</p>
                         <p>{item.moduleName}</p>
                         <p>{item.category}</p>
