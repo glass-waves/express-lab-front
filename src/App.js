@@ -27,7 +27,7 @@ export default class App extends Component {
     this.fetchData('/sorted');
   }
   idResultsHandler = () => {
-    this.fetchData('/module/single/1');
+    this.fetchData('/modules/single/1');
   }
   inStockResultsHandler = () => {
     this.fetchData('/instock');
