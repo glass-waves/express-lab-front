@@ -9,7 +9,7 @@ export default class App extends Component {
     data: [],
   }
   componentDidMount = async () => {
-    await this.fetchData('/');
+    await this.fetchData('/modules');
   }
 
   fetchData = async (path) => {
