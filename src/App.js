@@ -14,7 +14,7 @@ export default class App extends Component {
 
   fetchData = async (path) => {
     console.log('getting data!')
-    const data = await request.get(`https://floating-bayou-37638.herokuapp.com/${path}`);
+    const data = await request.get(`https://floating-bayou-37638.herokuapp.com${path}`);
     this.setState({
       data: data.body,
     })
