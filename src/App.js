@@ -2,50 +2,49 @@ import logo from './logo.svg';
 import './App.css';
 import request from 'superagent';
 import React, { Component } from 'react'
-import ModuleList from './ModuleList';
+import {
+    BrowserRouter as Router, 
+    Route, 
+    Switch,
+} from 'react-router-dom';
+import HomePage from './HomePage.js';
+import ListPage from './ListPage.js';
+import CreatePage from './CreatePage.js';
+import Header from './Header.js';
+import DetailPage from './DetailPage.js'
+
 
 export default class App extends Component {
-  state = {
-    data: [],
-  }
-  componentDidMount = async () => {
-    await this.fetchData('/modules');
-  }
-
-  fetchData = async (path) => {
-    console.log('getting data!')
-    const data = await request.get(`https://floating-bayou-37638.herokuapp.com${path}`);
-    this.setState({
-      data: data.body,
-    })
-  }
-
-  allResultsHandler = () => {
-    this.fetchData('/modules');
-  }
-  sortResultsHandler = () => {
-    this.fetchData('/sorted');
-  }
-  idResultsHandler = () => {
-    this.fetchData('/modules/single/1');
-  }
-  inStockResultsHandler = () => {
-    this.fetchData('/instock');
-  }
-
-  render() {
-    console.log(this.state.data)
-    return (
-      <div>
-        <button onClick={this.allResultsHandler}>All Modules</button>
-        <button onClick={this.sortResultsHandler}>Sort by Price</button>
-        <button onClick={this.idResultsHandler}>Only One Module</button>
-        <button onClick={this.inStockResultsHandler}>In Stock</button>
-        <div >
-          <ModuleList data={this.state.data} />
-        </div>
-      </div>
-    )
-  }
+    render() {
+        return (
+            <div>
+                <Router>
+                    <Header />
+                    <Switch>
+                        <Route 
+                            path="/" 
+                            exact
+                            component={HomePage} 
+                        />
+                        <Route 
+                            path="/modules" 
+                            exact
+                            component={ListPage} 
+                        />            
+                        <Route 
+                            path="/modules/:moduleId" 
+                            exact
+                            component={DetailPage} 
+                        />
+                        <Route 
+                            path="/create" 
+                            exact
+                            component={CreatePage} 
+                        />
+                    </Switch>
+                </Router>
+            </div>
+        )
+    }
 }
 
