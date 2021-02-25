@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getModuleById, updateModule } from './utils';
+import { deleteModule, getModuleById, updateModule } from './utils';
 
 export default class DetailPage extends Component {
     state = {
@@ -70,7 +70,16 @@ export default class DetailPage extends Component {
     submitHandler = async (e) => {
         e.preventDefault();
         await updateModule(this.state, this.props.match.params.moduleId)
+
         alert(`Module Updated: ${this.state}`)
+        this.props.history.push('/modules');
+
+    }
+    deleteHandler = async () => {
+        const deletedModule = await deleteModule(this.props.match.params.moduleId)
+
+        alert(`Module Deleted: ${deletedModule}`)
+        this.props.history.push('/modules');
     }
     render() {
         console.log("in render",  this.state)
@@ -116,6 +125,7 @@ export default class DetailPage extends Component {
                     </label>
                     <button>Update Module</button>
                 </form>
+                <button onClick={this.deleteHandler}>Delete Module</button>
             </div>
         )
     }

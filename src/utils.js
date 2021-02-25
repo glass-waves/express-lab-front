@@ -35,7 +35,7 @@ export const updateModule = async (newData, thisId) => {
     return body;
 }
 export const deleteModule = async (id) => {
-    const { body } = await request.delete(`${URL}/single/${id}`);
+    const { body } = await request.delete(`${URL}/modules/single/${id}`);
     return body;
 }
 
