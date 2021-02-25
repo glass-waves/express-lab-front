@@ -29,3 +29,22 @@ body {
 button {
     margin-top: 30px;
 }
+header {
+    margin-bottom: 20px;
+}
+header a {
+    margin-right: 5px;
+    text-decoration: none;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-evenly;
+}
+form input {
+    margin-bottom: 20px;
+}
+select {
+    margin-bottom: 20px;
+}
