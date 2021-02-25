@@ -30,6 +30,10 @@ export const insertNewModule = async (newModule) => {
     const { body } = await request.post(`${URL}/modules`).send(newModule);
     return body;
 }
+export const updateModule = async (newData, thisId) => {
+    const { body } = await request.put(`${URL}/modules/single/${thisId}`).send(newData);
+    return body;
+}
 export const deleteModule = async (id) => {
     const { body } = await request.delete(`${URL}/single/${id}`);
     return body;
