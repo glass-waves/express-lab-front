@@ -44,7 +44,13 @@ form {
 }
 form input {
     margin-bottom: 20px;
+    margin-left: 5px;
 }
 select {
     margin-bottom: 20px;
+    margin-left: 5px;
+}
+button {
+    max-width: 200px;
+    margin: 10px auto
 }

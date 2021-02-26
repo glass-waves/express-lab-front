@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { deleteModule, getModuleById, updateModule } from './utils';
+import { deleteModule, getCategories, getModuleById, updateModule } from './utils';
 
 export default class DetailPage extends Component {
     state = {
@@ -10,12 +10,13 @@ export default class DetailPage extends Component {
         size: 2,
         description: '',
         in_stock: false,
-        price: 1
+        price: 1,
+        categories: [] 
     }
     componentDidMount = async () => {
         const thisModuleArr = await getModuleById(this.props.match.params.moduleId);
         const thisModule = thisModuleArr[0];
-        console.log('thisModule in componentDidMount', thisModule)
+        const categories = await getCategories();
         await this.setState({
             module_name: thisModule.module_name,
             brand: thisModule.brand,
@@ -24,9 +25,11 @@ export default class DetailPage extends Component {
             size: thisModule.size,
             description: thisModule.description,
             in_stock: thisModule.in_stock,
-            price: thisModule.price
+            price: thisModule.price,
+            categories: categories
         })
     }
+
     handleNameChange = (e) => {
         this.setState({
             module_name: e.target.value
@@ -70,8 +73,6 @@ export default class DetailPage extends Component {
     submitHandler = async (e) => {
         e.preventDefault();
         await updateModule(this.state, this.props.match.params.moduleId)
-
-        alert(`Module Updated: ${this.state}`)
         this.props.history.push('/modules');
 
     }
@@ -91,16 +92,19 @@ export default class DetailPage extends Component {
                         <input type="text" value={this.state.module_name} onChange={this.handleNameChange} />
                     </label>
                     <label>
-                        Module Brand
+                        Module Brand 
                         <input type="text" value={this.state.brand} onChange={this.handleBrandChange} />
                     </label>
                     <label>
                         Category
                         <select value={this.state.category} onChange={this.handleCategoryChange}>
-                            <option value={1}>Oscillator</option>
+                            {this.state.categories.map(category => {
+                                return <option selected={this.state.category_id === category.id} value={category.id}>{category.category_name}</option>
+                            })}
+                            {/* <option value={1}>Oscillator</option>
                             <option value={2}>Filter</option>
                             <option value={3}>Envelope</option>
-                            <option value={4}>VCA</option>
+                            <option value={4}>VCA</option> */}
                         </select>
                     </label>
                     <label>
